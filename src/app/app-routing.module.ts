@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CompleteCaseComponent } from './complete-case/complete-case.component';
+import { CreateCaseComponent } from './create-case/create-case.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: CreateCaseComponent },
+  { path: 'createcase', component: CreateCaseComponent },
+  { path: 'completecase', component: CompleteCaseComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
