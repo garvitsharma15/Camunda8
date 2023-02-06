@@ -1,3 +1,11 @@
 body {
     background-color: #b82a2a;
-   }
+}
+
+table {
+    table-layout: auto;
+}
+
+.float-child {
+    text-align: center;
+}

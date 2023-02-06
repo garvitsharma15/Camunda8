@@ -1,0 +1,7 @@
+table {
+    table-layout: auto;
+  }
+
+.float-child {
+    text-align: center;
+}

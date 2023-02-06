@@ -5,4 +5,10 @@ export class Case {
     investigationType: string;
     caseCreator: string;
     caseCreatorMail: string;
+    caseLevel: string;
+    casePriority: string;
+    customerId: string;
+    customerMobile: string;
+    customerAddress: string;
+    customerZipcode: string;
 }
