@@ -73,14 +73,14 @@ completeTask (taskId: $taskId, variables: $variables) {
   }
 
   completeCase() {
-    this.http.post(`http://ec2-18-116-118-53.us-east-2.compute.amazonaws.com:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
+    this.http.post(`http://localhost:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
     })
     console.log(this.case.caseStatus)
     this.completetask(this.tasklist[this.selectedIndex].id, this.case.caseStatus)
   }
 
   ngOnInit(): void {
-    this.http.post(`http://ec2-18-116-118-53.us-east-2.compute.amazonaws.com:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
+    this.http.post(`http://localhost:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
     })
     this.getclaimedtask()
   }

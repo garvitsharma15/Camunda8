@@ -5,7 +5,7 @@ import {HttpLink} from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
 
 
-const uri = 'http://ec2-18-116-118-53.us-east-2.compute.amazonaws.com:8082/graphql/login?username=demo&password=demo'; 
+const uri = 'http://localhost:8082/graphql/login?username=demo&password=demo'; 
 // const uri = 'http://localhost:8082/graphql/login?username=demo&password=demo';
 // const uri = 'http://localhost:8082/graphql'; 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
