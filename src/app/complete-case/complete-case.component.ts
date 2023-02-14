@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { ConnectableObservable, map } from 'rxjs';
@@ -73,20 +73,25 @@ completeTask (taskId: $taskId, variables: $variables) {
   }
 
   completeCase() {
-    this.http.post(`http://ec2-18-116-118-53.us-east-2.compute.amazonaws.com:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
-    })
-    console.log(this.case.caseStatus)
     this.completetask(this.tasklist[this.selectedIndex].id, this.case.caseStatus)
   }
 
   ngOnInit(): void {
-    this.http.post(`http://ec2-18-116-118-53.us-east-2.compute.amazonaws.com:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
-    })
+    // https://dsm-1.tasklist.camunda.io/bb6d63fd-d49a-4d56-b32e-dd8f4164b14d/api/login
+    this.http.post(`https://login.cloud.camunda.io/oauth/token`, {"client_id":"7ilnLy57inDNWa0DqDvT~B3NSLdHcIhq",
+    "client_secret": "N6sNCDSb4rttLfO_R.NpIIeMF_7Z3LcuD2Amc-htDr18rNlD~SzK8yubfNY2.fKh",
+    "audience":"tasklist.camunda.io",
+    "grant_type":"client_credentials"}).subscribe((data: any) => {
+    sessionStorage.setItem("token",data.access_token)
+    }
+
+    )
+
     this.getclaimedtask()
   }
 
   completetask(id: string, caseStatus) {
-    console.log()
+
     this.apollo
       .mutate({
         mutation: this.COMPLETE_TASK,
