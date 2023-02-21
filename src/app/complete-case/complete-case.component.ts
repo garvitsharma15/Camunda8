@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { ConnectableObservable, map } from 'rxjs';
+import { url } from 'src/env';
 import { Case } from '../case';
 
 
@@ -15,6 +16,8 @@ export class CompleteCaseComponent implements OnInit {
   case: Case = new Case;
 
   selectedIndex: number
+
+  header: HttpHeaders
 
   constructor(private apollo: Apollo, private http: HttpClient) { }
 
@@ -77,15 +80,19 @@ completeTask (taskId: $taskId, variables: $variables) {
   }
 
   ngOnInit(): void {
-    // https://dsm-1.tasklist.camunda.io/bb6d63fd-d49a-4d56-b32e-dd8f4164b14d/api/login
-    this.http.post(`https://login.cloud.camunda.io/oauth/token`, {"client_id":"7ilnLy57inDNWa0DqDvT~B3NSLdHcIhq",
-    "client_secret": "N6sNCDSb4rttLfO_R.NpIIeMF_7Z3LcuD2Amc-htDr18rNlD~SzK8yubfNY2.fKh",
-    "audience":"tasklist.camunda.io",
-    "grant_type":"client_credentials"}).subscribe((data: any) => {
-    sessionStorage.setItem("token",data.access_token)
-    }
+    // // https://dsm-1.tasklist.camunda.io/bb6d63fd-d49a-4d56-b32e-dd8f4164b14d/api/login
+    // this.http.post(`https://login.cloud.camunda.io/oauth/token`, {"client_id":"",
+    // "client_secret": "",
+    // "audience":"tasklist.camunda.io",
+    // "grant_type":"client_credentials"}).subscribe((data: any) => {
+    // sessionStorage.setItem("token",data.access_token)
+    // }
 
-    )
+    // )
+
+    // , {headers : {"withCredentials": "true"}}
+    this.http.post(`http://`+url+`:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
+    })
 
     this.getclaimedtask()
   }
@@ -102,7 +109,7 @@ completeTask (taskId: $taskId, variables: $variables) {
             "value": '"' + caseStatus + '"'
           }
         }
-      }).subscribe(data => { window.location.reload() })
+      }).subscribe(data => { window.location.assign("/") })
   }
 
   getclaimedtask() {

@@ -3,19 +3,20 @@ import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
 import {ApolloClientOptions, ApolloLink, InMemoryCache} from '@apollo/client/core';
 import {HttpLink} from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
+import { url } from 'src/env';
 
-const uri = 'https://dsm-1.tasklist.camunda.io/bb6d63fd-d49a-4d56-b32e-dd8f4164b14d/graphql/'; 
+const uri = 'http://'+url+':8082/graphql/login?username=demo&password=demo'; 
 // const uri = 'http://localhost:8082/graphql'; 
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   // return {
   //   link: httpLink.create({uri}),
   //   cache: new InMemoryCache(),
   // };
-  console.log("GS");
   
   const basic = setContext((operation, context) => ({
     headers: {
-      Accept: 'charset=utf-8'
+      Accept: 'charset=utf-8',
+      // 'Cookie': 'TASKLIST-SESSION=A9536FA62492C06A8399C8F6C478180E'
     }
   }));
  

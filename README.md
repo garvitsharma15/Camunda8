@@ -14,14 +14,18 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Process to follow
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Update url in env.ts in src folder
+2. steps to create docker image
+    2.1 Place dockerfile in ui/ folder
+    2.2 "docker build . -t {docker_username_name}/{docker_repo_name} ." eg (docker build -t garvitsharma/fadsui:latest .)
+    2.3 "docker push {docker_username_name}/{docker_repo_name}" eg (docker push garvitsharma/fadsui:latest)
+    2.4 "docker run -p {outside-port}:{container-port} -d {image name}" (docker run -p 80:80 -d garvitsharma/fadsui) inside environment (azure/aws)
 
-## Running end-to-end tests
+3. additional commands 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    3.1 list docker containers : docker container ls
+    3.2 remove docker container : docker rm {container-name/ conatiner-id}
+    3.3 list docker image : docker image ls
+    3.4 remove docker image : docker image remove {imagename/image-id}
