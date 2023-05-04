@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { ConnectableObservable, map } from 'rxjs';
-import { url } from 'src/env';
+import { client_id, client_secret, url } from 'src/env';
 import { Case } from '../case';
 
 
@@ -81,18 +81,18 @@ completeTask (taskId: $taskId, variables: $variables) {
 
   ngOnInit(): void {
     // // https://dsm-1.tasklist.camunda.io/bb6d63fd-d49a-4d56-b32e-dd8f4164b14d/api/login
-    // this.http.post(`https://login.cloud.camunda.io/oauth/token`, {"client_id":"",
-    // "client_secret": "",
-    // "audience":"tasklist.camunda.io",
-    // "grant_type":"client_credentials"}).subscribe((data: any) => {
-    // sessionStorage.setItem("token",data.access_token)
-    // }
+    this.http.post(`https://login.cloud.camunda.io/oauth/token`, {"client_id":client_id,
+    "client_secret": client_secret,
+    "audience":"tasklist.camunda.io",
+    "grant_type":"client_credentials"}).subscribe((data: any) => {
+    sessionStorage.setItem("token",data.access_token)
+    }
 
-    // )
+    )
 
     // , {headers : {"withCredentials": "true"}}
-    this.http.post(`http://`+url+`:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
-    })
+    // this.http.post(`http://`+url+`:8082/api/login?username=demo&password=demo`, '').subscribe((data: any) => {
+    // })
 
     this.getclaimedtask()
   }

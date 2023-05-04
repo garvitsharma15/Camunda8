@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { url } from 'src/env';
+import { backend_url, url } from 'src/env';
 import { Case } from '../case';
 
 @Component({
@@ -16,7 +16,7 @@ export class CreateCaseComponent {
 
   createCase() {
     console.log(this.case)
-    this.http.post('http://'+url+':8090/camunda/startProcess', this.case).subscribe(data=>{
+    this.http.post('http://'+backend_url+':8050/camunda/startProcess', this.case).subscribe(data=>{
       alert("case created with instance id "+data)
       window.location.assign("/");
     })
